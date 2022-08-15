@@ -2,7 +2,8 @@
 
 #define LEDS_OFFSET 1
 #define FIRST_BIT_ON 1
-#define LEDS_ALLF_OFF 0
+#define LEDS_ALLF_OFF 0x0000
+#define LEDS_ALLF_ON 0xFFFF
 
 static uint16_t *puerto;
 static registro_errores_t NotificarError;
@@ -33,4 +34,9 @@ void LedsSingleTurnOn(uint8_t led)
 void LedsSingleTurnOff(uint8_t led)
 {
     *puerto &= ~LedToMask(led);
+}
+
+void LedsOnAllLeds(void)
+{
+    *puerto = LEDS_ALLF_ON;
 }
