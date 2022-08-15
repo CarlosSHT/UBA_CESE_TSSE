@@ -11,3 +11,7 @@ void LedsSingleTurnOff(uint8_t led);
 void LedsOnAllLeds(void);
 
 void LedsOffAllLeds(void);
+
+bool LedsIsOnNLed(uint8_t led);
+
+bool LedsIsOffNLed(uint8_t led);

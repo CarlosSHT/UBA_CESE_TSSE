@@ -74,9 +74,17 @@ void test_apagar_todos_los_leds(void)
 // Consultar el estado de un LED que está encendido
 void test_led_pos_n_esta_encendido(void)
 {
-    bool isOn_led;
+    bool isLedOn;
     LedsSingleTurnOn(12);
-    LedsIsOnNLed(true, &isOn_led);
+    isLedOn = LedsIsOnNLed(12);
+    TEST_ASSERT_EQUAL(true, isLedOn);
 }
 
 // Consultar el estado de un LED que est apagado
+void test_led_pos_n_esta_apagado(void)
+{
+    bool isLedOff;
+    // LedsSingleTurnOn(4);
+    isLedOff = LedsIsOffNLed(12);
+    TEST_ASSERT_EQUAL(true, isLedOff);
+}

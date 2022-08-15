@@ -45,3 +45,12 @@ void LedsOffAllLeds(void)
 {
     *puerto = LEDS_ALLF_OFF;
 }
+
+bool LedsIsOnNLed(uint8_t led)
+{
+    if (((FIRST_BIT_ON << (led - LEDS_OFFSET)) & *puerto) != 0)
+    {
+        return true;
+    }
+    return false;
+}
