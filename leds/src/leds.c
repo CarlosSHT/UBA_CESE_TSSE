@@ -4,6 +4,8 @@
 #define FIRST_BIT_ON 1
 #define LEDS_ALLF_OFF 0x0000
 #define LEDS_ALLF_ON 0xFFFF
+#define LEDS_MAX_VALUE 16
+#define LEDS_MIN_VALUE 1
 
 static uint16_t *puerto;
 static registro_errores_t NotificarError;
@@ -11,6 +13,16 @@ static registro_errores_t NotificarError;
 static uint16_t LedToMask(uint8_t led)
 {
     return (FIRST_BIT_ON << (led - LEDS_OFFSET));
+}
+
+static bool LedsWorkInRange(uint8_t led)
+{
+    if (led > LEDS_MAX_VALUE || led < LEDS_MIN_VALUE)
+    {
+        NotificarError(ALERTA, __FUNCTION__, __LINE__, "Numero de led invalido");
+        return false;
+    }
+    return true;
 }
 
 void LedsCreate(uint16_t *address, registro_errores_t errores)
@@ -22,11 +34,7 @@ void LedsCreate(uint16_t *address, registro_errores_t errores)
 
 void LedsSingleTurnOn(uint8_t led)
 {
-    if (led > 16)
-    {
-        NotificarError(ALERTA, __FUNCTION__, __LINE__, "Numero de led invalido");
-    }
-    else
+    if (LedsWorkInRange(led))
     {
         *puerto |= LedToMask(led);
     }
@@ -34,7 +42,10 @@ void LedsSingleTurnOn(uint8_t led)
 
 void LedsSingleTurnOff(uint8_t led)
 {
-    *puerto &= ~LedToMask(led);
+    if (LedsWorkInRange(led))
+    {
+        *puerto &= ~LedToMask(led);
+    }
 }
 
 void LedsOnAllLeds(void)
@@ -49,6 +60,9 @@ void LedsOffAllLeds(void)
 
 bool LedsIsOnNLed(uint8_t led)
 {
+    if (!LedsWorkInRange(led))
+        return false;
+
     if ((LedToMask(led) & *puerto) != 0)
     {
         return true;
@@ -58,6 +72,9 @@ bool LedsIsOnNLed(uint8_t led)
 
 bool LedsIsOffNLed(uint8_t led)
 {
+    if (!LedsWorkInRange(led))
+        return false;
+
     if ((LedToMask(led) & ~*puerto) != 0)
     {
         return true;
