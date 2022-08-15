@@ -2,7 +2,6 @@
 #include "leds.h"
 
 /**
-Revisar limites de los parametros.
 Revisar parámetros fuera de los limites.
  */
 uint16_t leds_virtuales;
@@ -87,5 +86,70 @@ void test_led_pos_n_esta_apagado(void)
     bool isLedOff;
 
     isLedOff = LedsIsOffNLed(8);
+    TEST_ASSERT_EQUAL(true, isLedOff);
+}
+
+// Revisar limites de los parametros.
+/// Limite inferior LedsSingleTurnOn
+void test_prende_led_individual_en_limite_inferior(void)
+{
+    LedsSingleTurnOn(1);
+    TEST_ASSERT_EQUAL(1 << 0, leds_virtuales);
+}
+/// Limite superior LedsSingleTurnOn
+void test_prende_led_individual_en_limite_superior(void)
+{
+    LedsSingleTurnOn(16);
+    TEST_ASSERT_EQUAL(1 << 15, leds_virtuales);
+}
+
+/// Limite inferior LedsSingleTurnOff
+void test_apaga_un_led_individual_en_limite_inferior(void)
+{
+    LedsSingleTurnOn(1);
+    LedsSingleTurnOff(1);
+    TEST_ASSERT_EQUAL(0, leds_virtuales);
+}
+/// Limite superior LedsSingleTurnOff
+void test_apaga_un_led_individual_en_limite_superior(void)
+{
+    LedsSingleTurnOn(16);
+    LedsSingleTurnOff(16);
+    TEST_ASSERT_EQUAL(0, leds_virtuales);
+}
+
+/// Limite inferior LedsIsOnNLed
+void test_led_pos_n_esta_encendido_en_limite_inferior(void)
+{
+    bool isLedOn;
+
+    LedsSingleTurnOn(1);
+    isLedOn = LedsIsOnNLed(1);
+    TEST_ASSERT_EQUAL(true, isLedOn);
+}
+/// Limite superior LedsIsOnNLed
+void test_led_pos_n_esta_encendido_en_limite_superior(void)
+{
+    bool isLedOn;
+
+    LedsSingleTurnOn(16);
+    isLedOn = LedsIsOnNLed(16);
+    TEST_ASSERT_EQUAL(true, isLedOn);
+}
+
+/// Limite inferior LedsIsOffNLed
+void test_led_pos_n_esta_apagado_en_limite_inferior(void)
+{
+    bool isLedOff;
+
+    isLedOff = LedsIsOffNLed(1);
+    TEST_ASSERT_EQUAL(true, isLedOff);
+}
+/// Limite superior LedsIsOffNLed
+void test_led_pos_n_esta_apagado_en_limite_superior(void)
+{
+    bool isLedOff;
+
+    isLedOff = LedsIsOffNLed(16);
     TEST_ASSERT_EQUAL(true, isLedOff);
 }

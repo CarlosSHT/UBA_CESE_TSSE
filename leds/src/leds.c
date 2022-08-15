@@ -7,6 +7,7 @@
 
 static uint16_t *puerto;
 static registro_errores_t NotificarError;
+
 static uint16_t LedToMask(uint8_t led)
 {
     return (FIRST_BIT_ON << (led - LEDS_OFFSET));
@@ -48,7 +49,7 @@ void LedsOffAllLeds(void)
 
 bool LedsIsOnNLed(uint8_t led)
 {
-    if (((FIRST_BIT_ON << (led - LEDS_OFFSET)) & *puerto) != 0)
+    if ((LedToMask(led) & *puerto) != 0)
     {
         return true;
     }
@@ -57,7 +58,7 @@ bool LedsIsOnNLed(uint8_t led)
 
 bool LedsIsOffNLed(uint8_t led)
 {
-    if (((FIRST_BIT_ON << (led - LEDS_OFFSET)) & ~*puerto) != 0)
+    if ((LedToMask(led) & ~*puerto) != 0)
     {
         return true;
     }
