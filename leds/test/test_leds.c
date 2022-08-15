@@ -59,9 +59,15 @@ void test_prender_un_led_invalido(void)
 }
 
 // Prender todos los LEDs de una vez.
-void teste_prender_todos_los_leds(void)
+void test_prender_todos_los_leds(void)
 {
     LedsOnAllLeds();
-    TEST_ASSERT_EQUAL(0xFFFFF, leds_virtuales);
+    TEST_ASSERT_EQUAL(0xFFFF, leds_virtuales);
 }
+
 // Apagar todos los LEDs de una vez.
+void test_apagar_todos_los_leds(void)
+{
+    LedsOffAllLeds();
+    TEST_ASSERT_EQUAL(0x0000, leds_virtuales);
+}

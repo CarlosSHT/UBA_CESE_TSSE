@@ -40,3 +40,8 @@ void LedsOnAllLeds(void)
 {
     *puerto = LEDS_ALLF_ON;
 }
+
+void LedsOffAllLeds(void)
+{
+    *puerto = LEDS_ALLF_OFF;
+}
