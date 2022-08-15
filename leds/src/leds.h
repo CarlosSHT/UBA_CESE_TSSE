@@ -8,3 +8,5 @@ void LedsSingleTurnOn(uint8_t led);
 void LedsSingleTurnOff(uint8_t led);
 
 void LedsOnAllLeds(void);
+
+void LedsOffAllLeds(void);
