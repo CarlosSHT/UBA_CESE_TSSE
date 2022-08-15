@@ -54,3 +54,12 @@ bool LedsIsOnNLed(uint8_t led)
     }
     return false;
 }
+
+bool LedsIsOffNLed(uint8_t led)
+{
+    if (((FIRST_BIT_ON << (led - LEDS_OFFSET)) & ~*puerto) != 0)
+    {
+        return true;
+    }
+    return false;
+}

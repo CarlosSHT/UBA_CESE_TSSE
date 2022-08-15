@@ -75,6 +75,7 @@ void test_apagar_todos_los_leds(void)
 void test_led_pos_n_esta_encendido(void)
 {
     bool isLedOn;
+
     LedsSingleTurnOn(12);
     isLedOn = LedsIsOnNLed(12);
     TEST_ASSERT_EQUAL(true, isLedOn);
@@ -84,7 +85,7 @@ void test_led_pos_n_esta_encendido(void)
 void test_led_pos_n_esta_apagado(void)
 {
     bool isLedOff;
-    // LedsSingleTurnOn(4);
-    isLedOff = LedsIsOffNLed(12);
+
+    isLedOff = LedsIsOffNLed(8);
     TEST_ASSERT_EQUAL(true, isLedOff);
 }
