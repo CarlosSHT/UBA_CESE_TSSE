@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include "errores.h"
 
 void LedsCreate(uint16_t *address, registro_errores_t errores);
