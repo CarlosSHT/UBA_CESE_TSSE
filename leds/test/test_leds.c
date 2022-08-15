@@ -2,8 +2,6 @@
 #include "leds.h"
 
 /**
-Consultar el estado de un LED que está encendido
-Consultar el estado de un LED que est apagado
 Revisar limites de los parametros.
 Revisar parámetros fuera de los limites.
  */
@@ -68,6 +66,17 @@ void test_prender_todos_los_leds(void)
 // Apagar todos los LEDs de una vez.
 void test_apagar_todos_los_leds(void)
 {
+    LedsOnAllLeds();
     LedsOffAllLeds();
     TEST_ASSERT_EQUAL(0x0000, leds_virtuales);
 }
+
+// Consultar el estado de un LED que está encendido
+void test_led_pos_n_esta_encendido(void)
+{
+    bool isOn_led;
+    LedsSingleTurnOn(12);
+    LedsIsOnNLed(true, &isOn_led);
+}
+
+// Consultar el estado de un LED que est apagado
